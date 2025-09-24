@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Components</title>
+    <style>
+      
+
+      .block-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+
+      .element-block {
+        margin: 5px;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        
+      }
+
+      .element-block span {
+        margin-right: 5px;
+      }
+
+      .numberbox{
+        background-color: #f0f0f0;
+        padding: 5px 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="cont0"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      
+      function ElementBlock({ text, number }) {
+        return (
+          <div className="element-block">
+            <span>{text}</span>
+            <div className="numberbox">{number}</div>
+          </div>
+        );
+      }
+
+      function ElementBlockRow({ prefix, count }) {
+        const blocks = [];
+        for (let i = 1; i <= count; i++) {
+          blocks.push(
+            <ElementBlock key={i} text={`${prefix}`} number={i} />
+          );
+        }
+        
+        return (
+          <div className="block-row">
+            {blocks}
+          </div>
+        );
+      }
+
+      function ElementCollectionApp() {
+        return (
+          <div>
+            <ElementBlockRow prefix="aardvark" count={3} />
+            <ElementBlockRow prefix="penguin" count={5} />
+            <ElementBlockRow prefix="panther" count={8} />
+          </div>
+        );
+      }
+
+      const el = document.getElementById('cont0');
+      const root = ReactDOM.createRoot(el);
+      root.render(<ElementCollectionApp />);
+    </script>
+  </body>
+
+</html>

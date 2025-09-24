@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+    <div id="cont0">foo</div>
+    
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      class Animal extends React.Component {
+        render() {
+          
+          return (
+              <div>
+                
+              {this.props.important ? (
+                <strong>
+                  The {this.props.name} is a {this.props.type}{" "}
+                  {this.props.legs !== 0 ? `having typically ${this.props.legs} legs.`: "without legs."}
+                </strong>
+              ) : (
+                <>
+                  The {this.props.name} is a {this.props.type}{" "}
+                  {this.props.legs !== 0 ? `having typically ${this.props.legs} legs.`: "without legs."}
+                </>
+              )}
+            </div>
+
+          );
+        }
+      } 
+
+      class VeryInterestingComponent extends React.Component {
+        render() {
+          return (
+            <div>
+              <Animal name="eagle" type="bird" legs={2} />
+              <Animal name="cat" type="mammal" legs={4} important={true} />
+              <Animal name="pike" type="fish" legs={0} />
+              <Animal name="whiskered bat" type="mammal" legs={2} />
+            </div>
+          );
+        }
+      }
+      
+      const el = document.getElementById('cont0');
+      const root = ReactDOM.createRoot(el);
+      root.render(<VeryInterestingComponent />);
+    </script>
+  </body>
+
+</html>
+
